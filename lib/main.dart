@@ -4,35 +4,44 @@ import 'ui/easing.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  List<Widget> list = [
-    EasingAnimation(),
-  ];
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Animations'),
-        ),
-        body: ListView(
-          children: list.map((page) {
-            return ListTile(
-              title: Text(page.toString()),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => page),
-                );
-              },
-            );
-          }).toList(),
-        ),
+      home: Main(),
+    );
+  }
+}
+
+class Main extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> list = [
+      EasingAnimation(),
+    ];
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Animations'),
+      ),
+      body: ListView(
+        children: list.map((widget) {
+          return ListTile(
+            title: Text(widget.toString()),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => EasingAnimation()),
+              );
+            },
+          );
+        }).toList(),
       ),
     );
   }
 }
+

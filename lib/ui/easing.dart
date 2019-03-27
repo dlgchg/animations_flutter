@@ -25,7 +25,7 @@ class _EasingAnimationState extends State<EasingAnimation>
       vsync: this,
       duration: const Duration(seconds: 2),
     );
-    _animation = Tween(begin: 0, end: 1).animate(
+    _animation = Tween(begin: -1.0, end: 0.0).animate(
       CurvedAnimation(
         parent: _controller,
         curve: Curves.fastOutSlowIn,
@@ -37,7 +37,7 @@ class _EasingAnimationState extends State<EasingAnimation>
     if (status == AnimationStatus.completed) {
       _animation.removeStatusListener(_handler);
       _controller.reset();
-      _animation = Tween(begin: 0, end: 1).animate(
+      _animation = Tween(begin: 0.0, end: 1.0).animate(
         CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn),
       )..addStatusListener(
           (status) {
@@ -53,23 +53,28 @@ class _EasingAnimationState extends State<EasingAnimation>
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
+    _controller.forward();
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.toString()),
+      ),
       body: AnimatedBuilder(
-          animation: _controller,
-          builder: (context, child) {
-            return Transform(
-              transform: Matrix4.translationValues(
-                _animation.value * width,
-                0.0,
-                0.0,
-              ),
-              child: Container(
-                width: 200.0,
-                height: 200.0,
-                color: Colors.blue,
-              ),
-            );
-          }),
+        animation: _controller,
+        builder: (context, child) {
+          return Transform(
+            transform: Matrix4.translationValues(
+              _animation.value * width,
+              0.0,
+              0.0,
+            ),
+            child: Container(
+              width: 200.0,
+              height: 200.0,
+              color: Colors.blue,
+            ),
+          );
+        },
+      ),
     );
   }
 
