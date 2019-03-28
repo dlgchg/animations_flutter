@@ -67,10 +67,12 @@ class _EasingAnimationState extends State<EasingAnimation>
               0.0,
               0.0,
             ),
-            child: Container(
-              width: 200.0,
-              height: 200.0,
-              color: Colors.blue,
+            child: Center(
+              child: Container(
+                width: 200.0,
+                height: 200.0,
+                color: Colors.blue,
+              ),
             ),
           );
         },

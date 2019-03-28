@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'ui/easing.dart';
+import 'ui/offset.dart';
+import 'ui/parent.dart';
+import 'ui/trans.dart';
+import 'ui/value.dart';
+import 'ui/mask.dart';
+import 'ui/spring.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,6 +30,12 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> list = [
       EasingAnimation(),
+      OffsetAnimation(),
+      ParentAnimation(),
+      TransAnimation(),
+      ValueAnimation(),
+//      SpringAnimation(),
+      MaskAnimation(),
     ];
     return Scaffold(
       appBar: AppBar(
@@ -35,7 +47,7 @@ class Main extends StatelessWidget {
             title: Text(widget.toString()),
             onTap: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => EasingAnimation()),
+                MaterialPageRoute(builder: (context) => widget),
               );
             },
           );
