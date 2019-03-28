@@ -104,6 +104,7 @@ Flutter 动画的基本使用
   }
 ```
 下面就是刚刚的效果.
+
 ![easing](https://github.com/dlgchg/animations_flutter/blob/master/easing.gif?raw=true)
 
 
