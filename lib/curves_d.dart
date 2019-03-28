@@ -105,26 +105,6 @@ class _CurvesDemoState extends State<CurvesDemo> with TickerProviderStateMixin {
     }
   }
 
-  _start(status){
-    if (status == AnimationStatus.completed) {
-      animations.map((animation) {
-        animation.removeStatusListener(_start);
-      });
-      animations.clear();
-      controller.reset();
-      for (var i = 0; i < cubics.length; i++) {
-        Animation animation = Tween(begin: 1.0, end: 0.0).animate(
-          CurvedAnimation(
-            parent: controller,
-            curve: cubics[i],
-          ),
-        )..addStatusListener(_handler);
-        animations.add(animation);
-      }
-      end = !end;
-      controller.forward();
-    }
-  }
 
   _handler(status) {
     if (status == AnimationStatus.completed) {
@@ -139,7 +119,12 @@ class _CurvesDemoState extends State<CurvesDemo> with TickerProviderStateMixin {
             parent: controller,
             curve: cubics[i],
           ),
-        )..addStatusListener(_start);
+        )..addStatusListener((status){
+          if(status == AnimationStatus.completed) {
+            _init();
+            controller.forward();
+          }
+        });
         animations.add(animation);
       }
       end = !end;
