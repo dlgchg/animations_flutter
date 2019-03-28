@@ -121,6 +121,11 @@ class _CurvesDemoState extends State<CurvesDemo> with TickerProviderStateMixin {
           ),
         )..addStatusListener((status){
           if(status == AnimationStatus.completed) {
+            animations.map((animation) {
+              animation.removeStatusListener(_handler);
+            });
+            animations.clear();
+            controller.reset();
             _init();
             controller.forward();
           }
