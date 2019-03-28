@@ -6,6 +6,7 @@ import 'ui/trans.dart';
 import 'ui/value.dart';
 import 'ui/mask.dart';
 import 'ui/spring.dart';
+import 'ac/ac.dart';
 
 void main() => runApp(MyApp());
 
@@ -34,8 +35,9 @@ class Main extends StatelessWidget {
       ParentAnimation(),
       TransAnimation(),
       ValueAnimation(),
-//      SpringAnimation(),
+      SpringAnimation(),
       MaskAnimation(),
+      AnimatedC(),
     ];
     return Scaffold(
       appBar: AppBar(
