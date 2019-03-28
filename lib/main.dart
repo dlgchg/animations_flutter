@@ -7,6 +7,7 @@ import 'ui/value.dart';
 import 'ui/mask.dart';
 import 'ui/spring.dart';
 import 'ac/ac.dart';
+import 'curves_d.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,6 +39,7 @@ class Main extends StatelessWidget {
       SpringAnimation(),
       MaskAnimation(),
       AnimatedC(),
+      CurvesDemo(),
     ];
     return Scaffold(
       appBar: AppBar(
