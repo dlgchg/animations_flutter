@@ -83,20 +83,47 @@ class _CurvesDemoState extends State<CurvesDemo> with TickerProviderStateMixin {
 
   List<Animation> animations = [];
 
+  bool end = false;
+
   @override
   void initState() {
     super.initState();
+    _init();
+  }
+
+  _init() {
     controller =
         AnimationController(vsync: this, duration: Duration(seconds: 2));
-    cubics.map((cubic) {
-      Animation animation = Tween(begin: 0.0, end: 1.0).animate(
+    for (var i = 0; i < cubics.length; i++) {
+      Animation animation = Tween(begin: -1.0, end: 0.0).animate(
         CurvedAnimation(
           parent: controller,
-          curve: cubic,
+          curve: cubics[i],
         ),
       )..addStatusListener(_handler);
       animations.add(animation);
-    });
+    }
+  }
+
+  _start(status){
+    if (status == AnimationStatus.completed) {
+      animations.map((animation) {
+        animation.removeStatusListener(_start);
+      });
+      animations.clear();
+      controller.reset();
+      for (var i = 0; i < cubics.length; i++) {
+        Animation animation = Tween(begin: 1.0, end: 0.0).animate(
+          CurvedAnimation(
+            parent: controller,
+            curve: cubics[i],
+          ),
+        )..addStatusListener(_handler);
+        animations.add(animation);
+      }
+      end = !end;
+      controller.forward();
+    }
   }
 
   _handler(status) {
@@ -106,17 +133,16 @@ class _CurvesDemoState extends State<CurvesDemo> with TickerProviderStateMixin {
       });
       animations.clear();
       controller.reset();
-      cubics.map((cubic) {
+      for (var i = 0; i < cubics.length; i++) {
         Animation animation = Tween(begin: 0.0, end: 1.0).animate(
           CurvedAnimation(
             parent: controller,
-            curve: cubic,
+            curve: cubics[i],
           ),
-        )..addStatusListener((status) {
-            _handler(status);
-          });
+        )..addStatusListener(_start);
         animations.add(animation);
-      });
+      }
+      end = !end;
       controller.forward();
     }
   }
