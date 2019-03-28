@@ -2,7 +2,11 @@
 
 Flutter 动画的基本使用
 
-![](https://github.com/dlgchg/animations_flutter/blob/master/animtions.gif?raw=true)
+![easing](https://github.com/dlgchg/animations_flutter/blob/master/easing.gif?raw=true)
+![offset](https://github.com/dlgchg/animations_flutter/blob/master/offset.gif?raw=true)
+![parent](https://github.com/dlgchg/animations_flutter/blob/master/parent.gif?raw=true)
+![trans](https://github.com/dlgchg/animations_flutter/blob/master/trans.gif?raw=true)
+![value](https://github.com/dlgchg/animations_flutter/blob/master/value.gif?raw=true)
 
 
 在使用Flutter动画的时候,我们通常使用这几个组件.
@@ -215,6 +219,7 @@ Flutter 动画的基本使用
 ```
 
 来看看效果.
+
 ![easing](https://github.com/dlgchg/animations_flutter/blob/master/offset.gif?raw=true)
 
 
