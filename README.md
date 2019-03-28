@@ -223,3 +223,74 @@ Flutter 动画的基本使用
 ![easing](https://github.com/dlgchg/animations_flutter/blob/master/offset.gif?raw=true)
 
 
+## 转换
+
+这里使用`BorderRadiusTween`来完成一个空间的转换动画,圆形转方形.
+这里将初始化设为50的一个圆,`BorderRadiusTween`设置圆的弧度.
+
+```dart
+AnimationController controller;
+  Animation animation, borderAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 2000),
+    )..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          controller.reverse();
+        }
+        if (status == AnimationStatus.dismissed) {
+          Navigator.pop(context);
+        }
+      });
+
+    animation = Tween(begin: 50.0, end: 200.0).animate(
+      CurvedAnimation(
+        parent: controller,
+        curve: Curves.ease,
+      ),
+    );
+
+    borderAnimation = BorderRadiusTween(
+      begin: BorderRadius.circular(75.0),
+      end: BorderRadius.circular(0.0),
+    ).animate(CurvedAnimation(
+      parent: controller,
+      curve: Curves.ease,
+    ));
+
+    controller.forward();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(widget.toString()),),
+      body: AnimatedBuilder(animation: controller, builder: (context, child) {
+        return Center(
+          child: Container(
+            width: animation.value,
+            height: animation.value,
+            decoration: BoxDecoration(
+              borderRadius: borderAnimation.value,
+              color: Colors.pink,
+            ),
+          ),
+        );
+      }),
+    );
+  }
+```
+
+![trans](https://github.com/dlgchg/animations_flutter/blob/master/trans.gif?raw=true)
+
+
